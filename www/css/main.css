@@ -18,4 +18,8 @@
     border-radius: 10px;
     margin: 100px auto 0;
     text-align: center;
+    padding: 10px;
+}
+.form-control {
+    width: 100px;
 }
