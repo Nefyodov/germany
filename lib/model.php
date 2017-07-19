@@ -4,7 +4,8 @@
  * @return array|bool|null
  */
 function selectAllAddress(){
-    $sql = 'SELECT `id`, `address`, `location`, `room nr`, `space` FROM `description`';
+    $chooseAddress = chooseAddress();
+    $sql = "SELECT `id`, `address`, `location`, `room nr`, `space` FROM `description` WHERE address='$chooseAddress'";
     global $link;
     if(!$result = mysqli_query($link,$sql))
         return false;
