@@ -31,26 +31,42 @@ require_once '../lib/lib.php';
             <input class="btn btn-default" type="submit" value="Choose address">
         </form>
     </div>
-    <table class="table table-bordered center-block">
-        <tr>
-            <th>Address</th>
-            <th>Location</th>
-            <th>Room nr.</th>
-            <th>Space</th>
-        </tr>
-    <?php
-    $address = selectAllAddress();
-        foreach ($address as $ad) {
-            ?>
+    <div class="center-block">
+        <table class="table table-bordered">
             <tr>
-                <td> <?= $ad['address'] ?> </td>
-                <td> <?= $ad['location'] ?> </td>
-                <td> <?= $ad['room nr'] ?> </td>
-                <td> <?= $ad['space'] ?> </td>
+                <th>Address</th>
+                <th>Location</th>
+                <th>Room nr.</th>
+                <th>Space</th>
+                <th>Rent plan</th>
+                <th>Costs plan</th>
+                <th>Heating plan</th>
+                <th>Cable TV</th>
+                <th>Comments</th>
+                <th>&#8364;/m2</th>
             </tr>
-            <?
-        }
-    ?>
-    </table>
+        <?php
+        $address = selectAllAddress();
+            foreach ($address as $ad) {
+                ?>
+                <tr>
+                    <td> <?= $ad['address'] ?> </td>
+                    <td> <?= $ad['location'] ?> </td>
+                    <td> <?= $ad['room nr'] ?> </td>
+                    <td> <?= $ad['space'] ?> </td>
+                    <form action="">
+                        <td><input type="text" class="form-control" placeholder="1200.00"></td>
+                        <td><input type="text" class="form-control" placeholder="100.00"></td>
+                        <td><input type="text" class="form-control" placeholder="100.00"></td>
+                        <td><input type="text" class="form-control" placeholder="50.00"></td>
+                        <td><textarea class="form-control textarea" rows="1" placeholder="Comments"></textarea></td>
+                        <td>10.00 &#8364;</td>
+                    </form>
+                </tr>
+                <?
+            }
+        ?>
+        </table>
+    </div>
 </body>
 </html>
