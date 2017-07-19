@@ -1,37 +1,37 @@
 body {
-    margin: 0;
     padding: 0;
+    text-align: center;
+    margin: 0 auto;
 }
 .menu {
     width: 400px;
     margin: 0 auto;
-}
-h1,h3 {
-    text-align: center;
-}
-.list-group-item {
-    text-align: center;
 }
 .center-block {
     width: 1200px;
 }
 .table {
     width: 100%;
-    margin: 0 auto;
 }
-form {
-    width: 100%;
+.header {
     border: 1px solid #ddd;
-    padding-top: 15px;
-    padding-bottom: 15px;
-
+    height: 80px;
+    margin:auto;
+    position: static;
 }
-.radio-inline:first-child {
-    margin-left: 250px;
+.header .radio-inline, .header .form-control,.header .btn{
+    width: 150px;
+    float: left;
+    margin: 20px;
+}
+.alert {
+    position: inherit;
+    float: left;
 }
 .form-control {
     height: 20px;
     width: 80px;
+    padding: 0;
 }
 th:first-child, td:first-child {
     width: 150px;

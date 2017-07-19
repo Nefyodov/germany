@@ -14,22 +14,29 @@ require_once '../lib/lib.php';
     <script src="../style/js/bootstrap.js"></script>
 </head>
 <body>
-    <div class="center-block">
-        <form class="center-block" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post">
-            <label class="radio-inline">
-                <input type="radio" name="address" value="Mozartstraße 20"> Mozartstraße 20
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="address" value="Duisburger Str. 101"> Duisburger Str. 101
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="address" value="Duisburger Str. 103"> Duisburger Str. 103
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="address" value="Garden/Garage"> Garden/Garage
-            </label>
-            <input class="btn btn-default" type="submit" value="Choose address">
+    <div class="center-block header">
+        <form class="table-main" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post">
+                <label class="radio-inline">
+                    <input type="radio" name="address" value="Mozartstraße 20"> Mozartstraße 20
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="address" value="Duisburger Str. 101"> Duisburger Str. 101
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="address" value="Duisburger Str. 103"> Duisburger Str. 103
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="address" value="Garden/Garage"> Garden/Garage
+                </label>
+                <?php
+                //Выпадающий список выбора месяца, месяц отправляется $_POST
+                selectedMonth();
+                ?>
+                <input class="btn btn-default" type="submit" value="Choose">
         </form>
+    </div>
+    <div class="center-block header">
+        <?php coorentSelection();?>
     </div>
     <div class="center-block">
         <table class="table table-bordered">
