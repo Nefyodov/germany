@@ -28,6 +28,9 @@ body {
     position: inherit;
     float: left;
 }
+.alert:first-child {
+    margin-left: 30%;
+}
 .form-control {
     height: 20px;
     width: 80px;

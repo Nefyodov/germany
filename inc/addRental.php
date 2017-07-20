@@ -37,6 +37,10 @@ require_once '../lib/lib.php';
     </div>
     <div class="center-block header">
         <?php coorentSelection();?>
+        <form id="saveRental" action="add/addRental.php" method="post">
+            <input type="hidden" name="month" value="<?php echo $_POST['month'];?>">
+        <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">
+        </form>
     </div>
     <div class="center-block">
         <table class="table table-bordered">
@@ -52,27 +56,25 @@ require_once '../lib/lib.php';
                 <th>Comments</th>
                 <th>&#8364;/m2</th>
             </tr>
-        <?php
-        $address = selectAllAddress();
-            foreach ($address as $ad) {
+                <?php
+                $address = selectFromDatabase();
+                    foreach ($address as $ad) {
+                        ?>
+                        <tr>
+                            <td> <?= $ad['address'] ?> </td>
+                            <td> <?= $ad['location'] ?> </td>
+                            <td> <?= $ad['room nr'] ?> </td>
+                            <td> <?= $ad['space'] ?> </td>
+                            <td><input form="saveRental" type="text" class="form-control" name="<?php echo $ad['id'].':'.'Rent plan';?>" placeholder="1200.00"></td>
+                            <td><input form="saveRental" type="text" class="form-control" name="<?php echo $ad['id'].':'.'Costs plan';?>" placeholder="100.00"></td>
+                            <td><input form="saveRental" type="text" class="form-control" name="<?php echo $ad['id'].':'.'Heating plan';?>" placeholder="100.00"></td>
+                            <td><input form="saveRental" type="text" class="form-control" name="<?php echo $ad['id'].':'.'Cable TV';?>" placeholder="50.00"></td>
+                            <td><textarea form="saveRental" class="form-control textarea" name="<?php echo $ad['id'].':'.'Comments';?>"rows="1" placeholder="Comments"></textarea></td>
+                            <td>10.00 &#8364;</td>
+                        </tr>
+                        <?
+                    }
                 ?>
-                <tr>
-                    <td> <?= $ad['address'] ?> </td>
-                    <td> <?= $ad['location'] ?> </td>
-                    <td> <?= $ad['room nr'] ?> </td>
-                    <td> <?= $ad['space'] ?> </td>
-                    <form action="">
-                        <td><input type="text" class="form-control" placeholder="1200.00"></td>
-                        <td><input type="text" class="form-control" placeholder="100.00"></td>
-                        <td><input type="text" class="form-control" placeholder="100.00"></td>
-                        <td><input type="text" class="form-control" placeholder="50.00"></td>
-                        <td><textarea class="form-control textarea" rows="1" placeholder="Comments"></textarea></td>
-                        <td>10.00 &#8364;</td>
-                    </form>
-                </tr>
-                <?
-            }
-        ?>
         </table>
     </div>
 </body>
