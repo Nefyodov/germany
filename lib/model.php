@@ -48,7 +48,7 @@ function selectFromDBCosts(){
     return $items;
 }
 
-function addActualFromDatabaseCosts($model, $month, $id, $cost, $comments=null) {
+function addActualFromDatabaseCosts($model, $month, $id, $cost, $comments) {
     $sql = 'INSERT INTO costs (model, month, id_costs, cost, comments)
             VALUE (?,?,?,?,?)';
     global $link;
@@ -58,6 +58,7 @@ function addActualFromDatabaseCosts($model, $month, $id, $cost, $comments=null) 
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
+    echo 'da';
 }
 function checkBeforeInsertDBCosts($model, $month, $id){
     $sql = "SELECT `id`, `model`, `month`, `id_costs`, `cost`, `comments` 

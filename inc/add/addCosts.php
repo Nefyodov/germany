@@ -5,6 +5,8 @@ require_once '../../lib/lib.php';
 
 $month = $_POST['month'];
 $model = 'plan';
+$cost = 0;
+$comments='';
 
 foreach($_POST as $key => $value)
 {
@@ -22,7 +24,6 @@ foreach($_POST as $key => $value)
         if (!$check) {
             $textResult = 'Data insert';
             addActualFromDatabaseCosts($model, $month, $id, $cost, $comments);
-            $v = $model. $month. $id. $cost. $comments;
         }else {
             $textResult = 'Database already have value. Please check address and month.';
         }
