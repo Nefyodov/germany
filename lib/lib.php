@@ -28,7 +28,7 @@ function chooseMonth(){
 }
 
 function selectedMonth(){
-    echo '<select class="form-control" name="month" required>';
+    echo '<select class="form-control" name="month" required> ';
     global $month;
     $selectedMonth = chooseMonth();
     for ($i=1; $i<=12; $i++){

@@ -18,7 +18,7 @@ foreach($_POST as $key => $value)
             $check = checkBeforeInsertDB($model, $month, $id, $purpose);
             if (!$check) {
                 $textResult = 'Data insert';
-                addActualFromDatabase($model, $month, $id, $purpose, $cost);
+                addActualFromDatabaseRental($model, $month, $id, $purpose, $cost);
             }else {
                 $textResult = 'Database already have value. Please check address and month.';
             }

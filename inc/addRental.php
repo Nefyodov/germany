@@ -37,13 +37,14 @@ require_once '../lib/lib.php';
     </div>
     <div class="center-block header">
         <?php coorentSelection();?>
-        <form id="saveRental" action="add/addRental.php" method="post">
+        <form id="saveRental" action="add/addRental" method="post">
             <input type="hidden" name="month" value="<?php echo $_POST['month'];?>">
-        <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">
+            <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">
         </form>
+        <a class="btn btn-default" href="menu">Back to menu</a>
     </div>
     <div class="center-block">
-        <table class="table table-bordered">
+        <table class="table table-bordered rental-table">
             <tr>
                 <th>Address</th>
                 <th>Location</th>
@@ -57,7 +58,7 @@ require_once '../lib/lib.php';
                 <th>&#8364;/m2</th>
             </tr>
                 <?php
-                $address = selectFromDatabase();
+                $address = selectFromDatabaseRantal();
                     foreach ($address as $ad) {
                         ?>
                         <tr>

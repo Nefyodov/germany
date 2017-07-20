@@ -36,17 +36,22 @@ body {
     width: 80px;
     padding: 0;
 }
-th:first-child, td:first-child {
+.rental-table th:first-child, .rental-table td:first-child {
     width: 150px;
 }
-th:last-child, td:last-child {
+.rental-table th:last-child, .rental-table td:last-child {
     width: 70px;
 }
-td:nth-child(1) {
+.rental-table td:nth-child(1) {
     padding: 0;
 }
 .textarea {
     margin: 0;
     padding: 0;
     width: 100%;
+}
+.costs-table {
+    width: 640px;
+    text-align: left;
+    margin: 0 auto;
 }
