@@ -73,3 +73,39 @@ function checkBeforeInsertDBCosts($model, $month, $id){
         return false;
     return $items;
 }
+
+function selectRentalForPivot($month){
+    $sql = "SELECT t1.id,`model`, `month`, t1.id_description, `purpose`,`address`,`location`,`room nr`,`purpose`,`cost` 
+            FROM `rental` AS `t1` 
+            LEFT JOIN `description` AS `t2` 
+            ON t1.id_description=t2.id 
+            WHERE month='$month'";
+    global $link;
+    if(!$result = mysqli_query($link,$sql))
+        return false;
+    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $items;
+}
+
+function selectCostsForPivot($month){
+    $sql = "SELECT name.id, `status`, `art`,`model`,`month`,`cost`,`comments` 
+            FROM `costs_name` AS name 
+            LEFT JOIN costs ON name.id=costs.id_costs
+            WHERE month='$month'";
+    global $link;
+    if(!$result = mysqli_query($link,$sql))
+        return false;
+    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $items;
+}
+function selectCostsNameForPivot(){
+    $sql = "SELECT `art` FROM `costs_name`";
+    global $link;
+    if(!$result = mysqli_query($link,$sql))
+        return false;
+    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $items;
+}

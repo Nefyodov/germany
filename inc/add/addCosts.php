@@ -4,7 +4,7 @@ require_once '../../lib/model.php';
 require_once '../../lib/lib.php';
 
 $month = $_POST['month'];
-$model = 'plan';
+$model = 'actual';
 $cost = 0;
 $comments='';
 

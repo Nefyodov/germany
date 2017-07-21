@@ -55,3 +55,62 @@ function coorentSelection(){
     }
 
 }
+
+/**
+ * PIVOT TABLE
+ */
+
+function CARental($model,$address){
+    if (isset($_POST['month'])){
+        global $rentalArray;
+        $sum=0;
+        foreach ($rentalArray as $v) {
+            if ($v['model'] == $model and $v['address']== $address and $v['purpose']==RENTAL) {
+                $sum += $v['cost'];
+            }
+        }
+    }
+    echo $sum;
+}
+function CAPrePayment($model,$address){
+    if (isset($_POST['month'])){
+        global $rentalArray;
+        $sum=0;
+        foreach ($rentalArray as $v) {
+            if ($v['model'] == $model and $v['address']== $address and $v['purpose']!=RENTAL) {
+                $sum += $v['cost'];
+            }
+        }
+    }
+    echo $sum;
+}
+
+function CACostsPlan($nameArtCost){
+    if (isset($_POST['month'])){
+        global $costsArray;
+        $sum=0;
+        foreach ($costsArray as $c){
+            if ($nameArtCost == $c['art'] and $c['model']=='plan'){
+               $sum = $c['cost'];
+               echo $sum;
+            }
+        }
+    }
+}
+function CACostsActual($nameArtCost){
+    if (isset($_POST['month'])){
+        global $costsArray;
+        $sum=0;
+        foreach ($costsArray as $c){
+            if ($nameArtCost == $c['art'] and $c['model']=='actual'){
+                $sum = $c['cost'];
+                echo $sum;
+            }
+        }
+    }
+}
+
+/**
+ * BWA
+ */
+
