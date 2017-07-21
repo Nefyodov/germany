@@ -92,7 +92,7 @@ function CACostsPlan($nameArtCost){
         foreach ($costsArray as $c){
             if ($nameArtCost == $c['art'] and $c['model']=='plan'){
                $sum = $c['cost'];
-               echo $sum;
+               return $sum;
             }
         }
     }
@@ -104,7 +104,7 @@ function CACostsActual($nameArtCost){
         foreach ($costsArray as $c){
             if ($nameArtCost == $c['art'] and $c['model']=='actual'){
                 $sum = $c['cost'];
-                echo $sum;
+                return $sum;
             }
         }
     }
@@ -113,4 +113,27 @@ function CACostsActual($nameArtCost){
 /**
  * BWA
  */
-
+function CARentalBWA($model){
+    if (isset($_POST['month'])){
+        global $rentalArray;
+        $sum=0;
+        foreach ($rentalArray as $v) {
+            if ($v['model'] == $model and $v['purpose']==RENTAL) {
+                $sum += $v['cost'];
+            }
+        }
+    }
+    return $sum;
+}
+function CAPrePaymentBWA($model){
+    if (isset($_POST['month'])){
+        global $rentalArray;
+        $sum=0;
+        foreach ($rentalArray as $v) {
+            if ($v['model'] == $model and $v['purpose']!=RENTAL) {
+                $sum += $v['cost'];
+            }
+        }
+    }
+    return $sum;
+}

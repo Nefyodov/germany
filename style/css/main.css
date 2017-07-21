@@ -77,3 +77,31 @@ body {
 .pivot-table td {
     height: 20px;
 }
+.bwa td:first-child {
+    font-weight: bold;
+}
+.left-menu {
+    border: 1px solid #ddd;
+    width: 150px;
+    margin: auto;
+    position: static;
+    display: block;
+    float: left;
+}
+.left-menu select {
+    height: 30px;
+    width: 120px;
+    margin: 20px auto;
+}
+.left-menu .alert {
+    width: 120px;
+    margin-left: 1.1em;
+}
+.breadcrumb {
+    background: #888;
+}
+.form-group .form-control {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+}

@@ -101,11 +101,15 @@ function selectCostsForPivot($month){
     return $items;
 }
 function selectCostsNameForPivot(){
-    $sql = "SELECT `art` FROM `costs_name`";
+    $sql = "SELECT `status`,`art` FROM `costs_name`";
     global $link;
     if(!$result = mysqli_query($link,$sql))
         return false;
     $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
     return $items;
+}
+
+function BWA($month){
+
 }

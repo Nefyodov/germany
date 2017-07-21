@@ -90,8 +90,8 @@ $costsNameArray = selectCostsNameForPivot();
                 foreach ($costsNameArray as $key => $value){?>
                     <tr>
                     <td><?php echo $value['art'];?></td>
-                    <td><?php CACostsPlan($value['art']);?></td>
-                    <td><?php CACostsActual($value['art']);?></td>
+                    <td><?php echo CACostsPlan($value['art']);?></td>
+                    <td><?php echo CACostsActual($value['art']);?></td>
                     <td></td>
                     </tr>
                 <?php
