@@ -1,8 +1,8 @@
 <?php
-define("DB_HOST","localhost");
-define("DB_LOGIN","nefyodov");
-define("DB_PASSWORD","46225778");
-define("DB_NAME","germany");
+define("DB_HOST","nefyodov.mysql.ukraine.com.ua");
+define("DB_LOGIN","nefyodov_db");
+define("DB_PASSWORD","tjCsF6me");
+define("DB_NAME","nefyodov_db");
 
 define("M20","Mozartstraße 20");
 define("D101","Duisburger Str. 101");
