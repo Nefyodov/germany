@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Июл 21 2017 г., 17:57
--- Версия сервера: 5.6.34
--- Версия PHP: 7.0.14
+-- Час створення: Лип 23 2017 р., 20:43
+-- Версія сервера: 5.7.16
+-- Версія PHP: 7.1.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `germany`
+-- База даних: `germany`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `costs`
+-- Структура таблиці `costs`
 --
 
 CREATE TABLE `costs` (
@@ -36,7 +36,7 @@ CREATE TABLE `costs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `costs`
+-- Дамп даних таблиці `costs`
 --
 
 INSERT INTO `costs` (`id`, `model`, `month`, `id_costs`, `cost`, `comments`) VALUES
@@ -198,7 +198,7 @@ INSERT INTO `costs` (`id`, `model`, `month`, `id_costs`, `cost`, `comments`) VAL
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `costs_name`
+-- Структура таблиці `costs_name`
 --
 
 CREATE TABLE `costs_name` (
@@ -209,7 +209,7 @@ CREATE TABLE `costs_name` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `costs_name`
+-- Дамп даних таблиці `costs_name`
 --
 
 INSERT INTO `costs_name` (`id`, `status`, `art`, `art_ru`) VALUES
@@ -237,7 +237,7 @@ INSERT INTO `costs_name` (`id`, `status`, `art`, `art_ru`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `description`
+-- Структура таблиці `description`
 --
 
 CREATE TABLE `description` (
@@ -249,7 +249,7 @@ CREATE TABLE `description` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `description`
+-- Дамп даних таблиці `description`
 --
 
 INSERT INTO `description` (`id`, `address`, `location`, `room nr`, `space`) VALUES
@@ -311,7 +311,7 @@ INSERT INTO `description` (`id`, `address`, `location`, `room nr`, `space`) VALU
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `rental`
+-- Структура таблиці `rental`
 --
 
 CREATE TABLE `rental` (
@@ -325,7 +325,7 @@ CREATE TABLE `rental` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `rental`
+-- Дамп даних таблиці `rental`
 --
 
 INSERT INTO `rental` (`id`, `model`, `month`, `id_description`, `purpose`, `cost`, `comments`) VALUES
@@ -2620,67 +2620,98 @@ INSERT INTO `rental` (`id`, `model`, `month`, `id_description`, `purpose`, `cost
 (2288, 'actual', 'January', 51, 'Rent_plan', 125, ''),
 (2289, 'actual', 'January', 52, 'Rent_plan', 150, '');
 
+-- --------------------------------------------------------
+
 --
--- Индексы сохранённых таблиц
+-- Структура таблиці `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(6) NOT NULL,
+  `login` varchar(16) NOT NULL,
+  `password` varchar(120) NOT NULL,
+  `access` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп даних таблиці `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `password`, `access`) VALUES
+(1, 'i.kozir', '$2y$10$a6M37pDROwX8e9cEkGSffOq49jujaGfRpzoORZrdTly4JmKjMzIP6', 1);
+
+--
+-- Індекси збережених таблиць
 --
 
 --
--- Индексы таблицы `costs`
+-- Індекси таблиці `costs`
 --
 ALTER TABLE `costs`
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `id_costs` (`id_costs`);
 
 --
--- Индексы таблицы `costs_name`
+-- Індекси таблиці `costs_name`
 --
 ALTER TABLE `costs_name`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Индексы таблицы `description`
+-- Індекси таблиці `description`
 --
 ALTER TABLE `description`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Индексы таблицы `rental`
+-- Індекси таблиці `rental`
 --
 ALTER TABLE `rental`
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `id_description` (`id_description`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- Індекси таблиці `users`
+--
+ALTER TABLE `users`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT для збережених таблиць
 --
 
 --
--- AUTO_INCREMENT для таблицы `costs`
+-- AUTO_INCREMENT для таблиці `costs`
 --
 ALTER TABLE `costs`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 --
--- AUTO_INCREMENT для таблицы `costs_name`
+-- AUTO_INCREMENT для таблиці `costs_name`
 --
 ALTER TABLE `costs_name`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT для таблицы `description`
+-- AUTO_INCREMENT для таблиці `description`
 --
 ALTER TABLE `description`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
--- AUTO_INCREMENT для таблицы `rental`
+-- AUTO_INCREMENT для таблиці `rental`
 --
 ALTER TABLE `rental`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2290;
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- AUTO_INCREMENT для таблиці `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Обмеження зовнішнього ключа збережених таблиць
 --
 
 --
--- Ограничения внешнего ключа таблицы `rental`
+-- Обмеження зовнішнього ключа таблиці `rental`
 --
 ALTER TABLE `rental`
   ADD CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`id_description`) REFERENCES `description` (`id`);
