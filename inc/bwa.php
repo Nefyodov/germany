@@ -12,20 +12,21 @@ $sumConvCostsPlan = 0;
 $sumConvCostsActual = 0;
 $sumNoneConvCostsPlan = 0;
 $sumNoneConvCostsActual = 0;
-?>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>BWA</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../style/css/bootstrap.css">
-    <link rel="stylesheet" href="../style/css/main.css">
-    <script src="../style/js/jquery.js"></script>
-    <script src="../style/js/bootstrap.js"></script>
-</head>
-<body>
+if (isset($_COOKIE['auth'])) {
+    ?>
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>BWA</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../style/css/bootstrap.css">
+        <link rel="stylesheet" href="../style/css/main.css">
+        <script src="../style/js/jquery.js"></script>
+        <script src="../style/js/bootstrap.js"></script>
+    </head>
+    <body>
     <div class="left-menu">
-        <form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post">
+        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
             <?php
             //Выпадающий список выбора месяца, месяц отправляется $_POST
             selectedMonth();
@@ -34,9 +35,9 @@ $sumNoneConvCostsActual = 0;
         </form>
         <div class="alert">Current selection:</div>
         <?php
-        if (isset($_POST['month'])){
+        if (isset($_POST['month'])) {
             echo '<div class="alert alert-success" role="alert">' . $_POST['month'] . '</div>';
-        }else{
+        } else {
             echo '<div class="alert alert-danger" role="alert"> Choose month</div>';
         }
         ?>
@@ -55,26 +56,26 @@ $sumNoneConvCostsActual = 0;
                 <td>Rental income</td>
                 <td></td>
                 <td></td>
-                <td><?php echo CARentalBWA('plan');?></td>
-                <td><?php echo CARentalBWA('actual');?></td>
+                <td><?php echo CARentalBWA('plan'); ?></td>
+                <td><?php echo CARentalBWA('actual'); ?></td>
             </tr>
             <tr>
                 <td>Pre payment convertible costs</td>
                 <td></td>
                 <td></td>
-                <td><?php echo CAPrePaymentBWA('plan');?></td>
-                <td><?php echo CAPrePaymentBWA('actual');?></td>
+                <td><?php echo CAPrePaymentBWA('plan'); ?></td>
+                <td><?php echo CAPrePaymentBWA('actual'); ?></td>
             </tr>
             <tr class="breadcrumb">
                 <td>Full income</td>
                 <td></td>
                 <td></td>
-                <td><?php echo $fullIncomePlan = CARentalBWA('plan') + CAPrePaymentBWA('plan');?></td>
-                <td><?php echo $fullIncomeActual = CARentalBWA('actual') + CAPrePaymentBWA('actual');?></td>
+                <td><?php echo $fullIncomePlan = CARentalBWA('plan') + CAPrePaymentBWA('plan'); ?></td>
+                <td><?php echo $fullIncomeActual = CARentalBWA('actual') + CAPrePaymentBWA('actual'); ?></td>
             </tr>
             <?php
-            foreach ($costsNameArray as $key => $value){
-                if ($value['status']=='convertible') {
+            foreach ($costsNameArray as $key => $value) {
+                if ($value['status'] == 'convertible') {
                     ?>
                     <tr>
                         <td><?php echo ucfirst($value['art']); ?></td>
@@ -84,8 +85,8 @@ $sumNoneConvCostsActual = 0;
                         <td><?php echo CACostsActual($value['art']); ?></td>
                     </tr>
                     <?php
-                    $sumConvCostsPlan +=CACostsPlan($value['art']);
-                    $sumConvCostsActual +=CACostsActual($value['art']);
+                    $sumConvCostsPlan += CACostsPlan($value['art']);
+                    $sumConvCostsActual += CACostsActual($value['art']);
                 }
             }
             ?>
@@ -93,12 +94,12 @@ $sumNoneConvCostsActual = 0;
                 <td>Summary convertible costs</td>
                 <td></td>
                 <td></td>
-                <td><?php echo $sumConvCostsPlan;?></td>
-                <td><?php echo $sumConvCostsActual;?></td>
+                <td><?php echo $sumConvCostsPlan; ?></td>
+                <td><?php echo $sumConvCostsActual; ?></td>
             </tr>
             <?php
-            foreach ($costsNameArray as $key => $value){
-                if ($value['status']=='none convertible') {
+            foreach ($costsNameArray as $key => $value) {
+                if ($value['status'] == 'none convertible') {
                     ?>
                     <tr>
                         <td><?php echo ucfirst($value['art']); ?></td>
@@ -108,8 +109,8 @@ $sumNoneConvCostsActual = 0;
                         <td><?php echo CACostsActual($value['art']); ?></td>
                     </tr>
                     <?php
-                    $sumNoneConvCostsPlan +=CACostsPlan($value['art']);
-                    $sumNoneConvCostsActual +=CACostsActual($value['art']);
+                    $sumNoneConvCostsPlan += CACostsPlan($value['art']);
+                    $sumNoneConvCostsActual += CACostsActual($value['art']);
                 }
             }
             ?>
@@ -117,19 +118,19 @@ $sumNoneConvCostsActual = 0;
                 <td>Summary none convertible costs</td>
                 <td></td>
                 <td></td>
-                <td><?php echo $sumNoneConvCostsPlan;?></td>
-                <td><?php echo $sumNoneConvCostsActual;?></td>
+                <td><?php echo $sumNoneConvCostsPlan; ?></td>
+                <td><?php echo $sumNoneConvCostsActual; ?></td>
             </tr>
             <tr>
                 <td>Summary all costs</td>
                 <td></td>
                 <td></td>
-                <td><?php echo $sumConvCostsPlan + $sumNoneConvCostsPlan;?></td>
-                <td><?php echo $sumConvCostsActual + $sumNoneConvCostsActual;?></td>
+                <td><?php echo $sumConvCostsPlan + $sumNoneConvCostsPlan; ?></td>
+                <td><?php echo $sumConvCostsActual + $sumNoneConvCostsActual; ?></td>
             </tr>
             <?php
-            foreach ($costsNameArray as $key => $value){
-                if ($value['status']=='taxes') {
+            foreach ($costsNameArray as $key => $value) {
+                if ($value['status'] == 'taxes') {
                     ?>
                     <tr>
                         <td><?php echo ucfirst($value['art']); ?></td>
@@ -146,10 +147,14 @@ $sumNoneConvCostsActual = 0;
                 <td>Revenue</td>
                 <td></td>
                 <td></td>
-                <td><?php echo $fullIncomePlan - $sumConvCostsPlan - $sumNoneConvCostsPlan - $taxesPlan;?></td>
-                <td><?php echo $fullIncomeActual - $sumConvCostsActual - $sumNoneConvCostsActual - $taxesActual;?></td>
+                <td><?php echo $fullIncomePlan - $sumConvCostsPlan - $sumNoneConvCostsPlan - $taxesPlan; ?></td>
+                <td><?php echo $fullIncomeActual - $sumConvCostsActual - $sumNoneConvCostsActual - $taxesActual; ?></td>
             </tr>
         </table>
     </div>
-</body>
-</html>
+    </body>
+    </html>
+    <?php
+}else{
+    header('Location:../');
+}

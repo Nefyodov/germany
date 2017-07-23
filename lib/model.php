@@ -110,6 +110,16 @@ function selectCostsNameForPivot(){
     return $items;
 }
 
-function BWA($month){
+//function BWA($month){
+//
+//}
 
+function auth($user) {
+    $sql = "SELECT `login`,`password`,`access` FROM `users` WHERE login='$user'";
+    global $link;
+    if(!$result = mysqli_query($link,$sql))
+        return false;
+    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $items;
 }

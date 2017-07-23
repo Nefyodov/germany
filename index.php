@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Pivot Table</title>
+    <title>Please login</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/css/bootstrap.css">
     <link rel="stylesheet" href="../style/css/main.css">
