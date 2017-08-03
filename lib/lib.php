@@ -4,7 +4,7 @@ require_once 'model.php';
 
 function debug($var) {
     echo '<pre>';
-    var_dump($var);
+    print_r($var);
     echo '</pre>';
     die();
 }
@@ -136,4 +136,11 @@ function CAPrePaymentBWA($model){
         }
     }
     return $sum;
+}
+
+function placeholder($placeholder,$ad,$purpose){
+    foreach ($placeholder as $p){
+        if ($p['id_description']==$ad['id'] and $p['purpose']==$purpose)
+            return $p['cost'] . '.00';
+    }
 }

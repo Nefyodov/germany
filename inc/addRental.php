@@ -59,7 +59,9 @@ if (isset($_COOKIE['auth'])) {
                 <th>&#8364;/m2</th>
             </tr>
             <?php
-            $address = selectFromDatabaseRantal();
+            $m = $_POST['month'];
+            $placeholder = selectTableAndPlaceholder($m);
+            $address = selectFromDatabaseRental();
             foreach ($address as $ad) {
                 ?>
                 <tr>
@@ -68,17 +70,17 @@ if (isset($_COOKIE['auth'])) {
                     <td> <?= $ad['room nr'] ?> </td>
                     <td> <?= $ad['space'] ?> </td>
                     <td><input form="saveRental" type="text" class="form-control"
-                               name="<?php echo $ad['id'] . ':' . 'Rent plan'; ?>" placeholder="1200.00"></td>
+                               name="<?php echo $ad['id'] . ':' . 'Rent plan'; ?>" placeholder="<?php echo placeholder($placeholder,$ad,'Rent_plan');?>"></td>
                     <td><input form="saveRental" type="text" class="form-control"
-                               name="<?php echo $ad['id'] . ':' . 'Costs plan'; ?>" placeholder="100.00"></td>
+                               name="<?php echo $ad['id'] . ':' . 'Costs plan'; ?>" placeholder="<?php echo placeholder($placeholder,$ad,'Costs_plan');?>"></td>
                     <td><input form="saveRental" type="text" class="form-control"
-                               name="<?php echo $ad['id'] . ':' . 'Heating plan'; ?>" placeholder="100.00"></td>
+                               name="<?php echo $ad['id'] . ':' . 'Heating plan'; ?>" placeholder="<?php echo placeholder($placeholder,$ad,'Heating_plan');?>"></td>
                     <td><input form="saveRental" type="text" class="form-control"
-                               name="<?php echo $ad['id'] . ':' . 'Cable TV'; ?>" placeholder="50.00"></td>
+                               name="<?php echo $ad['id'] . ':' . 'Cable TV'; ?>" placeholder="<?php echo placeholder($placeholder,$ad,'Cable_TV');?>"></td>
                     <td><textarea form="saveRental" class="form-control textarea"
                                   name="<?php echo $ad['id'] . ':' . 'Comments'; ?>" rows="1"
                                   placeholder="Comments"></textarea></td>
-                    <td>10.00 &#8364;</td>
+                    <td><?php echo round(placeholder($placeholder,$ad,'Rent_plan')/$ad['space'],2);?> &#8364;</td>
                 </tr>
                 <?
             }

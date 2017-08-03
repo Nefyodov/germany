@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_URI'] == '/inc/menu') {
     $bwa = 'inc/bwa';
 }
 if (isset($_COOKIE['auth'])) {
+    $level = unserialize(base64_decode($_COOKIE['auth']));
     ?>
     <!DOCTYPE HTML>
     <html>
@@ -25,18 +26,22 @@ if (isset($_COOKIE['auth'])) {
     </head>
     <body>
     <div class="menu">
-        <h1>Admin</h1>
-        <h3>Available actions:</h3>
+        <?php
+        if ($level === '1')
+            $menu = $menuRU;
+        else $menu = $menuEN;
+        ?>
+        <h1><?php echo $menu['Admin']?></h1>
+        <h3><?php echo $menu['Available actions']?>:</h3>
         <ul>
             <li class="list-group-item"><a href='<?php echo $rent; ?>'>Entry rental income</a></li>
             <li class="list-group-item"><a href='<?php echo $costs; ?>'>Entry costs</a></li>
-            <li class="list-group-item"><a href='<?php echo $pivot; ?>'>View pivot table</a></li>
-            <li class="list-group-item"><a href='<?php echo $bwa; ?>'>View BWA</a></li>
-            <li class="list-group-item"><a href='../sec/logout'>End a session</a></li>
+            <li class="list-group-item"><a href='<?php echo $pivot; ?>'><?php echo $menu['View pivot table']?></a></li>
+            <li class="list-group-item"><a href='<?php echo $bwa; ?>'><?php echo $menu['View BWA']?></a></li>
+            <li class="list-group-item"><a href='../sec/logout'><?php echo $menu['End a session']?></a></li>
         </ul>
     </div>
     <?
-
     ?>
     </body>
     </html>

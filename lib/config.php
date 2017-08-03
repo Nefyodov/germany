@@ -21,3 +21,18 @@ if (!$link) {
         . ':'
         . mysqli_connect_error();
 }
+
+$menuEN = [
+    'Admin' => 'Admin',
+    'Available actions'=>'Available actions',
+    'View pivot table'=>'View pivot table',
+    'View BWA'=>'View BWA',
+    'End a session'=>'End a session'
+];
+$menuRU = [
+    'Admin' => 'Меню администратора',
+    'Available actions'=>'Доступные действия',
+    'View pivot table'=>'Просмотреть свод',
+    'View BWA'=>'Просмотреть P&L',
+    'End a session'=>'Завершить сессию'
+];
