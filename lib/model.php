@@ -1,4 +1,13 @@
 <?php
+function returnSQL($sql){
+    global $link;
+    if(!$result = mysqli_query($link,$sql))
+        return false;
+    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $items;
+}
+
 /**
  * Вывод содержимого таблицы БД в виде ассоциативного массива
  * @return array|bool|null
@@ -8,24 +17,14 @@ function selectFromDatabaseRental(){
     $sql = "SELECT `id`, `address`, `location`, `room nr`, `space` 
             FROM `description` 
             WHERE address='$chooseAddress'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 
 function selectTableAndPlaceholder($month){
     $sql = "SELECT `id_description`,`purpose`,`cost` 
             FROM `rental`
             WHERE month='$month' AND model='plan'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 
 function addActualFromDatabaseRental($model, $month, $id, $purpose, $cost) {
@@ -44,22 +43,12 @@ function checkBeforeInsertDB($model, $month, $id, $purpose){
     $sql = "SELECT `id`, `model`, `month`, `id_description`, `purpose` 
             FROM `rental` 
             WHERE model='$model' AND month='$month' AND id_description='$id' AND purpose='$purpose'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 
 function selectFromDBCosts(){
     $sql = "SELECT `id`, `status`, `art`, `art_ru` FROM `costs_name`";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 
 function addActualFromDatabaseCosts($model, $month, $id, $cost, $comments) {
@@ -94,12 +83,7 @@ function selectRentalForPivot($month){
             LEFT JOIN `description` AS `t2` 
             ON t1.id_description=t2.id 
             WHERE month='$month'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 
 function selectCostsForPivot($month){
@@ -107,21 +91,11 @@ function selectCostsForPivot($month){
             FROM `costs_name` AS name 
             LEFT JOIN costs ON name.id=costs.id_costs
             WHERE month='$month'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }
 function selectCostsNameForPivot(){
-    $sql = "SELECT `status`,`art` FROM `costs_name`";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    $sql = "SELECT `status`,`art`,`art_ru` FROM `costs_name`";
+    return returnSQL($sql);
 }
 
 //function BWA($month){
@@ -130,10 +104,5 @@ function selectCostsNameForPivot(){
 
 function auth($user) {
     $sql = "SELECT `login`,`password`,`access` FROM `users` WHERE login='$user'";
-    global $link;
-    if(!$result = mysqli_query($link,$sql))
-        return false;
-    $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $items;
+    return returnSQL($sql);
 }

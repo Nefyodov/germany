@@ -1,5 +1,6 @@
 <?php
 require_once '../lib/config.php';
+require_once '../lib/language.php';
 if ($_SERVER['REQUEST_URI'] == '/inc/menu') {
     $rent = 'addRental';
     $costs = 'addCosts';

@@ -50,8 +50,8 @@ if (isset($_COOKIE['auth'])) {
             foreach ($dbcosts as $cs) {
                 ?>
                 <tr>
-                    <td> <?= ucfirst($cs['status']) ?> </td>
-                    <td> <?= ucfirst($cs['art']) ?> </td>
+                    <td> <?php echo ucfirst($cs['status']); ?> </td>
+                    <td> <?php echo ucfirst($cs['art']); ?> </td>
                     <td><input form="saveCosts" type="text" class="form-control"
                                name="<?php echo $cs['id'] . ':' . 'cost'; ?>" placeholder="50.00"></td>
                     <td><textarea form="saveCosts" class="form-control textarea"
