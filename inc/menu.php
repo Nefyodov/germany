@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_URI'] == '/inc/menu') {
 }
 if (isset($_COOKIE['auth'])) {
     $level = unserialize(base64_decode($_COOKIE['auth']));
+    if ($level === '1') $menu = $menuRU;
+    else $menu = $menuEN;
     ?>
     <!DOCTYPE HTML>
     <html>
@@ -27,16 +29,12 @@ if (isset($_COOKIE['auth'])) {
     </head>
     <body>
     <div class="menu">
-        <?php
-        if ($level === '1')
-            $menu = $menuRU;
-        else $menu = $menuEN;
-        ?>
         <h1><?php echo $menu['Admin']?></h1>
         <h3><?php echo $menu['Available actions']?>:</h3>
-        <ul>
+        <ul><?php if ($level==='2'){?>
             <li class="list-group-item"><a href='<?php echo $rent; ?>'>Entry rental income</a></li>
             <li class="list-group-item"><a href='<?php echo $costs; ?>'>Entry costs</a></li>
+            <?php }?>
             <li class="list-group-item"><a href='<?php echo $pivot; ?>'><?php echo $menu['View pivot table']?></a></li>
             <li class="list-group-item"><a href='<?php echo $bwa; ?>'><?php echo $menu['View BWA']?></a></li>
             <li class="list-group-item"><a href='../sec/logout'><?php echo $menu['End a session']?></a></li>
