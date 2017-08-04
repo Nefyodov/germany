@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Час створення: Лип 23 2017 р., 20:43
--- Версія сервера: 5.7.16
+-- Час створення: Сер 04 2017 р., 11:55
+-- Версія сервера: 5.7.16-log
 -- Версія PHP: 7.1.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -2638,7 +2638,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `access`) VALUES
-(1, 'i.kozir', '$2y$10$a6M37pDROwX8e9cEkGSffOq49jujaGfRpzoORZrdTly4JmKjMzIP6', 1);
+(1, 'i.kozir', '$2y$10$a6M37pDROwX8e9cEkGSffOq49jujaGfRpzoORZrdTly4JmKjMzIP6', 1),
+(2, 'admin', '$2y$10$jvo1J..N8J/LBFTxGr1hnOwEvDF7apECtYO8VXOxCllkZLy/4urlu', 2);
 
 --
 -- Індекси збережених таблиць
@@ -2705,7 +2706,7 @@ ALTER TABLE `rental`
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Обмеження зовнішнього ключа збережених таблиць
 --
