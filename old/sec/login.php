@@ -15,7 +15,7 @@ $hash = $logined['0']['password'];
 if ($logined) {
     if (checkHash($pswrd,$hash)) {
         $auth = base64_encode(serialize($logined['0']['access']));
-        setcookie("auth",$auth,time()+86400,'/');
+        setcookie("login",$auth,time()+86400,'/');
         header('Location: ../inc/menu');
     } else {
         header('Location:../');

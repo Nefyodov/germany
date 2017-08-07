@@ -1,8 +1,14 @@
 <?php
-class User extends \Illuminate\Database\Eloquent\Model
+class Users extends \Illuminate\Database\Eloquent\Model
 {
-    public static function getAUsers()
+    public static function checkUsers($login)
     {
-        return User::where('login','like','i%')->get();
+        return Users::where('login','=',"$login")
+                    ->select([
+                        'login',
+                        'password',
+                        'access'
+                    ])
+                    ->get();
     }
 }

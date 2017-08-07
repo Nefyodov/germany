@@ -2,9 +2,10 @@
 require_once 'config.php';
 require_once 'models/users.php';
 require_once 'core/views.php';
+require_once 'core/language.php';
 $routes = explode('/',$_SERVER['REQUEST_URI']);
 
-$controller_name = 'Main';
+$controller_name = 'Login';
 $action_name = 'index';
 
 if (!empty($routes[1])){
@@ -41,3 +42,4 @@ try{
         require_once 'errors/404.php';
     }
 }
+

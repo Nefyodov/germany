@@ -2,10 +2,10 @@
 require_once 'vendor/autoload.php';
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-define('DBHOST','localhost');
-define('DBNAME','germanyMVC');
-define('DBUSER','nefyodov');
-define('DBPASSWORD','46225778');
+//define('DBHOST','localhost');
+//define('DBNAME','germanyMVC');
+//define('DBUSER','nefyodov');
+//define('DBPASSWORD','46225778');
 
 
 $capsule = new Capsule;
