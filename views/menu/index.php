@@ -1,7 +1,11 @@
+<?php
+$menuArr = $data['menu'];
+$accessLevel = $data['access'];
+?>
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title><?php echo $data['Admin']?></title>
+        <title><?php echo $menuArr['Admin']?></title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../style/css/bootstrap.css">
         <link rel="stylesheet" href="../style/css/main.css">
@@ -10,15 +14,15 @@
     </head>
     <body>
         <div class="menu">
-            <h1><?php echo $data['Admin']?></h1>
-            <h3><?php echo $data['Available actions']?>:</h3>
-            <ul><?php if ($level==='2'){?>
-                <li class="list-group-item"><a href='<?php echo $rent; ?>'>Entry rental income</a></li>
-                <li class="list-group-item"><a href='<?php echo $costs; ?>'>Entry costs</a></li>
+            <h1><?php echo $menuArr['Admin']?></h1>
+            <h3><?php echo $menuArr['Available actions']?>:</h3>
+            <ul><?php if ($accessLevel=='2'){?>
+                <li class="list-group-item"><a href='rental'>Entry rental income</a></li>
+                <li class="list-group-item"><a href='costs'>Entry costs</a></li>
                 <?php }?>
-                <li class="list-group-item"><a href='<?php echo $pivot; ?>'><?php echo $data['View pivot table']?></a></li>
-                <li class="list-group-item"><a href='<?php echo $bwa; ?>'><?php echo $data['View BWA']?></a></li>
-                <li class="list-group-item"><a href='../old/sec/logout'><?php echo $data['End a session']?></a></li>
+                <li class="list-group-item"><a href='pivot'><?php echo $menuArr['View pivot table']?></a></li>
+                <li class="list-group-item"><a href='bwa'><?php echo $menuArr['View BWA']?></a></li>
+                <li class="list-group-item"><a href='menu/logout'><?php echo $menuArr['End a session']?></a></li>
             </ul>
         </div>
     </body>

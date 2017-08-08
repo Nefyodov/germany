@@ -1,5 +1,5 @@
 <?php
-class Language
+class AccessLevel
 {
     private $menuEN = [
         'Admin' => 'Admin',
@@ -67,21 +67,33 @@ class Language
         'Summary all costs'=>'Итого затраты',
         'Revenue'=>'Чистая прибыль'
     ];
+    public $sessionAccess;
 
-    public function checkCookie()
+    public function __construct()
     {
-        return unserialize(base64_decode($_COOKIE['login']));
+        $this->sessionAccess = unserialize(base64_decode($_COOKIE['login']));
     }
-    public function getLanguage()
+    public function getLanguageArray()
     {
-        if ($this->checkCookie()=='1'){
+        if ($this->sessionAccess=='1'){
             $lang['menu']=$this->menuRU;
             $lang['pivot']=$this->pivotRU;
             return $lang;
-        }elseif($this->checkCookie()=='2'){
+        }elseif($this->sessionAccess=='2'){
             $lang['menu']=$this->menuEN;
             $lang['pivot']=$this->pivotEN;
             return $lang;
         }
+    }
+
+    private function deleteCookie()
+    {
+        setcookie("login",'0',time()-1,'/');
+    }
+
+    public function logout()
+    {
+        $this->deleteCookie();
+        header('Location: ../login');
     }
 }

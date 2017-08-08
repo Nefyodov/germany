@@ -3,9 +3,19 @@ class Menu
 {
     public function index()
     {
-        $language = new Language();
-        $data = $language->getLanguage();
+        $access = new AccessLevel();
+        $langArray = $access->getLanguageArray();
+
+        $data['menu'] = $langArray['menu'];
+        $data['access'] = $access->sessionAccess;
+
         $view = new View();
-        $view->render('menu/index',$data['menu']);
+        $view->render('menu/index',$data);
+    }
+
+    public function logout()
+    {
+        $access = new AccessLevel();
+        $access->logout();
     }
 }
