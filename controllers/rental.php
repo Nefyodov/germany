@@ -2,8 +2,9 @@
 class Rental
 {
     public $month = array();
-    private $address;
-    private $choosedMonth;
+    public $address;
+    public $choosedMonth;
+    public $checkURLFromFilter;
 
     public function __construct()
     {
@@ -29,10 +30,11 @@ class Rental
 
     public function filters()
     {
-        if (!empty($_POST['Choose']))
+        if (!empty($_POST['month']))
         {
             $this->choosedMonth = $_POST['month'];
             $this->address = $_POST['address'];
         }
+        $this->index();
     }
 }
