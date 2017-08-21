@@ -1,5 +1,6 @@
 <?php
-
+//echo '<pre>';
+//print_r($data);
 ?>
 
 <!DOCTYPE HTML>
@@ -11,34 +12,32 @@
         <link rel="stylesheet" href="../style/css/main.css">
         <script src="../style/js/jquery.js"></script>
         <script src="../style/js/bootstrap.js"></script>
-<!--        <script src="../style/js/ajax.js"></script>-->
+        <script src="../style/js/ajax.js"></script>
     </head>
     <body>
         <div class="center-block header">
-            <form class="table-main" action="rental/filters" method="post">
+            <form id="selected" class="table-main" method="post">
                 <label class="radio-inline">
-                    <input id="address" type="radio" name="address" value="Mozartstraße 20"> Mozartstraße 20
+                    <input class="address" type="radio" name="address" value="Mozartstraße 20"> Mozartstraße 20
                 </label>
                 <label class="radio-inline">
-                    <input id="address" type="radio" name="address" value="Duisburger Str. 101"> Duisburger Str. 101
+                    <input class="address" type="radio" name="address" value="Duisburger Str. 101"> Duisburger Str. 101
                 </label>
                 <label class="radio-inline">
-                    <input id="address" type="radio" name="address" value="Duisburger Str. 103"> Duisburger Str. 103
+                    <input class="address" type="radio" name="address" value="Duisburger Str. 103"> Duisburger Str. 103
                 </label>
                 <label class="radio-inline">
-                    <input id="address" type="radio" name="address" value="Garden/Garage"> Garden/Garage
+                    <input class="address" type="radio" name="address" value="Garden/Garage"> Garden/Garage
                 </label>
                     <select id="month" class="form-control" name="month" required>
             <?php foreach ($data['listOfMonth'] as $d):?>
             <option value="<?php echo $d?>"><?php echo $d?></option>
             <?php endforeach; ?>        </select>
                 <input id="send" class="btn btn-default" type="submit" value="Choose">
-<!--                <button id="send" class="btn btn-default" type="submit">Choose</button>-->
             </form>
         </div>
         <div class="center-block header">
-            <div id="selection" class="alert alert-success" role="alert">Current selection
-                <?php echo $data['choosedMonth'];?>
+            <div id="currentSelection" class="alert alert-success" role="alert">Current selection
             </div>
 <!--            <form id="saveRental" action="rental/addRental" method="post">-->
 <!--                <input type="hidden" name="month" value="--><?php //echo $_POST['month']; ?><!--">-->
@@ -89,7 +88,3 @@
     </body>
 </html>
 
-<?php
-echo '<pre>';
-print_r($_REQUEST['POST']);
-?>
