@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="../style/css/main.css">
         <script src="../style/js/jquery.js"></script>
         <script src="../style/js/bootstrap.js"></script>
-        <script src="../style/js/ajax.js"></script>
+        <script src="../style/js/main.js"></script>
     </head>
     <body>
         <div class="center-block header">

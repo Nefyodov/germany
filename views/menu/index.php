@@ -17,7 +17,7 @@ $accessLevel = $data['access'];
             <h1><?php echo $menuArr['Admin']?></h1>
             <h3><?php echo $menuArr['Available actions']?>:</h3>
             <ul><?php if ($accessLevel=='2'){?>
-                <li class="list-group-item"><a href='rental'>Entry rental income</a></li>
+                <li class="list-group-item"><a href='rentalincome'>Entry rental income</a></li>
                 <li class="list-group-item"><a href='costs'>Entry costs</a></li>
                 <?php }?>
                 <li class="list-group-item"><a href='pivot'><?php echo $menuArr['View pivot table']?></a></li>

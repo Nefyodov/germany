@@ -11,6 +11,7 @@ class RentalIncome
     }
     public function index()
     {
+
         $data['listOfMonth'] = $this->listOfMonth;
 
         $view = new View();
@@ -19,7 +20,7 @@ class RentalIncome
     private function generateListOfMonth()
     {
         for ($i=1; $i<=12; $i++){
-            $month[] = date('F Y',mktime(0,0,0,$i));
+            $month[] = date('F',mktime(0,0,0,$i));
         }
         return $month;
     }
@@ -27,8 +28,8 @@ class RentalIncome
     {
         if ($_POST['address'] && $_POST['month'])
         {
-            $this->currentAddress = $_POST['address'];
-            $this->currentMonth = $_POST['month'];
+            $this->currentAddress = htmlspecialchars(trim($_POST['address']));
+            $this->currentMonth = htmlspecialchars(trim($_POST['month']));
             $this->sendJSON();
         }
         else
@@ -43,7 +44,11 @@ class RentalIncome
             'address' => $this->currentAddress,
             'month' => $this->currentMonth,
         ];
-        $data['planRental'] = Rental::planRentalForPlaceholder($this->currentAddress,$this->currentMonth);
+        $tableColumsName = Description::tableColums($this->currentAddress);
+        $placeholderValue = Rental::planRentalForPlaceholder($this->currentMonth);
+        $data['tableColumsName'] =$tableColumsName;
+//        $data['placeholderValue'] =$placeholderValue;
+        //$this->joinArray($tableColumsName,$placeholderValue);
         return $data;
     }
 
@@ -52,4 +57,15 @@ class RentalIncome
         $data = $this->prepareJSON();
         echo json_encode($data);
     }
+
+    public function joinArray($tableColumsName,$placeholderValue)
+    {
+        $data = $tableColumsName;
+        foreach ($tableColumsName as $data)
+        {
+
+        }
+        return $data;
+    }
+
 }
