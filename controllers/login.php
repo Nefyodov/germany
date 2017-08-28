@@ -25,8 +25,8 @@ class Login
         if (empty($_POST['login'])){return;}
         else
         {
-            $loginInForm['login'] = $_POST['login'];
-            $loginInForm['password'] = $_POST['password'];
+            $loginInForm['login'] = htmlspecialchars(trim($_POST['login']));
+            $loginInForm['password'] = htmlspecialchars(trim($_POST['password']));
             return $loginInForm;
         }
     }
