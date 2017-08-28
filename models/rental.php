@@ -1,4 +1,4 @@
-<?php
+<?php //Нужно удалить этот класс!
 class Rental extends \Illuminate\Database\Eloquent\Model
 {
     protected $table = 'rental';

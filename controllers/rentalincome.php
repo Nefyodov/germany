@@ -44,11 +44,7 @@ class RentalIncome
             'address' => $this->currentAddress,
             'month' => $this->currentMonth,
         ];
-        $tableColumsName = Description::tableColums($this->currentAddress);
-        $placeholderValue = Rental::planRentalForPlaceholder($this->currentMonth);
-        $data['tableColumsName'] =$tableColumsName;
-//        $data['placeholderValue'] =$placeholderValue;
-        //$this->joinArray($tableColumsName,$placeholderValue);
+        $data['tableColumsName'] = Description::tableColums($this->currentAddress,$this->currentMonth);
         return $data;
     }
 

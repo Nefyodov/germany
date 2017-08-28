@@ -1,29 +1,23 @@
 <?php
 class Description
 {
-    protected $table = 'description';
-
-    public static function connection()
+    public static function tableColums($address,$month)
     {
-        try {
-            $DBH = new PDO("mysql:host=DBHOST;dbname=DBNAME", DBUSER, DBPASSWORD);
-            $DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        }
-        catch(PDOException $e) {
-            file_put_contents('../logs/PDOErrors.txt', $e->getMessage(), FILE_APPEND);
-        }
-    }
+    $host = DBHOST;
+    $name = DBNAME;
+    $pdo = new PDO("mysql:host=$host;dbname=$name", DBUSER, DBPASSWORD);
+    $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $pdo->setAttribute( PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC );
 
-    public static function tableColums($address)
-    {
-        Description::connection();
-        $STH = $DBH->query('SELECT description.id,`address`, `location`, `room nr`, `space`,`purpose`,`cost`,rental.comments FROM `description`
-                            LEFT JOIN `rental`
-                            ON description.id=rental.id_description
-                            WHERE rental.model=\'plan\' 
-                            AND rental.month=\'April\' 
-                            AND address=\'Duisburger Str. 101\'');
-         
+
+    $stmt = $pdo->prepare('SELECT description.id,`address`, `location`, `room nr`, `space`,`purpose`,`cost`,rental.comments FROM `description`
+                                    LEFT JOIN `rental`
+                                    ON description.id=rental.id_description
+                                    WHERE rental.model=\'plan\' 
+                                    AND rental.month=? 
+                                    AND address=?');
+    $stmt->execute(["$month","$address"]);
+    return $stmt->fetchAll();
     }
 }
 
