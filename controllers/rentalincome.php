@@ -57,15 +57,4 @@ class RentalIncome
         $data = $this->prepareJSON();
         echo json_encode($data);
     }
-
-    public function joinArray($tableColumsName,$placeholderValue)
-    {
-        $data = $tableColumsName;
-        foreach ($tableColumsName as $data)
-        {
-
-        }
-        return $data;
-    }
-
 }
