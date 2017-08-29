@@ -39,7 +39,7 @@
         <div class="center-block header">
             <div id="currentSelection" class="alert alert-success" role="alert">Current selection
             </div>
-            <form id="saveRental" action="rentalincome/addrental" method="post">
+            <form id="saveRental" method="post">
                 <input type="hidden" name="month" value="<?php echo $_POST['month']; ?>">
                 <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">
             </form>

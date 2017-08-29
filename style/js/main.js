@@ -19,8 +19,6 @@ $(document).ready(function ()
         return false;
     });
 });
-
-
 function createTableFromRentalIncome(array)
 {
     if  ($("#table_rental")){
@@ -61,11 +59,57 @@ function writeTable(array)
         DataCell.append($('<td/>',{text:p1.location}));
         DataCell.append($('<td/>',{text:p1['room nr']}));
         DataCell.append($('<td/>',{text:p1.space}));
-        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['rent_plan']})));
-        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['costs_plan']})));
-        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['heating_plan']})));
-        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['cable_TV']})));
-        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"textarea",placeholder:p1.comments})));
+        DataCell.append($('<td/>').append($('<input/>',{
+            name:p1.id+'|'+'rent_plan',
+            class:"form-control",
+            form:"saveRental",
+            type:"text",
+            placeholder:p1['rent_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{
+            name:p1.id+'|'+'costs_plan',
+            class:"form-control",
+            form:"saveRental",
+            type:"text",
+            placeholder:p1['costs_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{
+            name:p1.id+'|'+'heating_plan',
+            class:"form-control",
+            form:"saveRental",
+            type:"text",
+            placeholder:p1['heating_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{
+            name:p1.id+'|'+'cable_TV',
+            class:"form-control",
+            form:"saveRental",
+            type:"text",
+            placeholder:p1['cable_TV']})));
+        DataCell.append($('<td/>').append($('<input/>',{
+            name:p1.id+'|'+'comments',
+            class:"form-control",
+            form:"saveRental",
+            type:"textarea",
+            placeholder:p1.comments})));
         $("tbody",table).append(DataCell);
     })
 }
+$(document).ready(function ()
+{
+    $("#saveRental").submit(function ()
+    {
+        var selectedValue = $(this).serialize();
+        $.ajax
+        ({
+            type: "POST",
+            url: "rentalincome/filter",
+            data: selectedValue,
+            success: function (html)
+            {
+                var currentSelection = JSON.parse(html);
+                console.log(currentSelection);
+                $("#currentSelection").html('Address: ' + currentSelection.selection.address + ';</br>Month: ' + currentSelection.selection.month);
+                createTableFromRentalIncome(currentSelection.tableColumsName);
+            }
+        });
+        return false;
+    });
+});
