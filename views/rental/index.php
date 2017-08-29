@@ -39,13 +39,13 @@
         <div class="center-block header">
             <div id="currentSelection" class="alert alert-success" role="alert">Current selection
             </div>
-<!--            <form id="saveRental" action="rental/addRental" method="post">-->
-<!--                <input type="hidden" name="month" value="--><?php //echo $_POST['month']; ?><!--">-->
-<!--                <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">-->
-<!--            </form>-->
-<!--            <a class="btn btn-default" href="menu.php">Back to menu</a>-->
+            <form id="saveRental" action="rentalincome/addrental" method="post">
+                <input type="hidden" name="month" value="<?php echo $_POST['month']; ?>">
+                <input form="saveRental" class="btn btn-default" type="submit" value="Write to database">
+            </form>
+            <a class="btn btn-default" href="menu">Back to menu</a>
         </div>
-<!--        <div class="center-block">-->
+        <div id="table_rental_income">
 <!--            <table class="table table-bordered rental-table">-->
 <!--                <tr>-->
 <!--                    <th>Address</th>-->
@@ -84,7 +84,7 @@
 <!--                </tr>-->
 <!--            --><?// } ?>
 <!--            </table>-->
-<!--        </div>-->
+        </div>
     </body>
 </html>
 

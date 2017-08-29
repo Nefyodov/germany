@@ -1,46 +1,3 @@
-// window.onload = function () {
-//     var inp_address = document.getElementById('address');
-//     var inp_month = document.getElementById('month');
-//
-//     document.getElementById('send').onclick = function () {
-//         var data = 'address=' + inp_address.value + '&' + 'month=' + inp_month.value;
-//         // alert(data);
-//         showAsyncRequest(data);
-//     }
-// }
-//
-// var request;
-// var url = 'rental/filter';
-//
-// function showAsyncRequest(data) {
-//     request = getXmlHttpRequest();
-//     request.open('POST', url, true);
-//     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     request.send(data);
-//     request.onreadystatechange = showAsyncRequestComplete;
-// }
-//
-// function showAsyncRequestComplete() {
-//     if (request.readyState == 4 && request.status == 200){
-//         var result = document.getElementById("selection");
-//         result.innerHTML= request.responseText;
-//     }
-// }
-// function getXmlHttpRequest() {
-//     if (window.XMLHttpRequest){
-//         try {return new XMLHttpRequest();}
-//         catch (e){}
-//     }
-//     else if (window.ActiveXObject){
-//         try {
-//             return new ActiveXObject('Msxml2.XMLHTTP');
-//         } catch (e){}
-//         try {
-//             return new ActiveXObject('Microsoft.XMLHTTP');
-//         } catch (e){}
-//     }
-//     return null;
-// }
 $(document).ready(function ()
 {
     $("#selected").submit(function ()
@@ -56,9 +13,59 @@ $(document).ready(function ()
                 var currentSelection = JSON.parse(html);
                 console.log(currentSelection);
                 $("#currentSelection").html('Address: ' + currentSelection.selection.address + ';</br>Month: ' + currentSelection.selection.month);
-
+                createTableFromRentalIncome(currentSelection.tableColumsName);
             }
         });
         return false;
     });
 });
+
+
+function createTableFromRentalIncome(array)
+{
+    if  ($("#table_rental")){
+        $("#table_rental").remove();
+        writeTable(array);
+    } else {
+        writeTable(array);
+    }
+}
+function writeTable(array)
+{
+    var table = $('<table/>', {
+        id:     'table_rental',
+        class:  'table table-bordered rental-table'
+    });
+    $('#table_rental_income').addClass('center-block').append(table);
+    $('#table_rental').append(
+        $('<thead/>'),
+        $('<tbody/>')
+    );
+    var TableTitle = ["Address", "Location","Room nr.","Space","Rent plan",
+        "Costs plan","Heating plan","Cable TV","Comments"];
+    //Наполняем табличку
+    //Заголовок
+    var TitleCell = $('<tr/>');
+    $.each(TableTitle,function( myIndex, a) {
+        TitleCell.append(
+            $('<th/>',{
+                text:a
+            })
+        );
+    });
+    $("thead",table).append(TitleCell);
+    //Данные
+    array.forEach(function (p1, p2, p3) {
+        var DataCell = $('<tr/>');
+        DataCell.append($('<td/>',{text:p1.address}));
+        DataCell.append($('<td/>',{text:p1.location}));
+        DataCell.append($('<td/>',{text:p1['room nr']}));
+        DataCell.append($('<td/>',{text:p1.space}));
+        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['rent_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['costs_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['heating_plan']})));
+        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"text",placeholder:p1['cable_TV']})));
+        DataCell.append($('<td/>').append($('<input/>',{class:"form-control",form:"saveRental",type:"textarea",placeholder:p1.comments})));
+        $("tbody",table).append(DataCell);
+    })
+}

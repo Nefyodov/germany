@@ -53,4 +53,5 @@ class RentalIncome
         $data = $this->prepareJSON();
         echo json_encode($data);
     }
+
 }
