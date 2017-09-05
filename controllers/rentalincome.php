@@ -2,8 +2,8 @@
 class RentalIncome
 {
     public $listOfMonth = array();
-    public $currentMonth;
-    public $currentAddress;
+    public static $currentMonth;
+    public static $currentAddress;
 
     public function __construct()
     {
@@ -24,6 +24,11 @@ class RentalIncome
         }
         return $month;
     }
+
+    /**
+     * выводит на экран выбранные данные (месяц+адрес) и отрисовывает таблицу из базы.
+     * @return bool
+     */
     public function filter()
     {
         if ($_POST['address'] && $_POST['month'])
@@ -37,8 +42,7 @@ class RentalIncome
             return false;
         }
     }
-
-    public function prepareJSON()
+    public function prepareJSONToWriteTable()
     {
         $data['selection'] = [
             'address' => $this->currentAddress,
@@ -47,11 +51,43 @@ class RentalIncome
         $data['tableColumsName'] = Description::tableColums($this->currentAddress,$this->currentMonth);
         return $data;
     }
-
     public function sendJSON()
     {
-        $data = $this->prepareJSON();
+        $data = $this->prepareJSONToWriteTable();
         echo json_encode($data);
+    }
+
+
+    public function saveRental()
+    {
+        $arrayToSave = $this->prepareArrayToSave();
+        Description::saveRenral($arrayToSave);
+
+    }
+    public function prepareArrayToSave()
+    {
+        /**
+         * Подготавливает массив для сохранения в базу данных
+         */
+        $arrayToSave = [];
+        if ($_POST){
+            foreach ($_POST as $key => $value){
+                if ($key == 'address'){
+                    $arrayToSave['address'] = $value;
+                }
+                elseif ($key == 'month'){
+                    $arrayToSave['month'] = $value;
+                }else{
+                    $r = explode('|',$key);
+                    $arrayToSave['id'][$r[0]][$r[1]] = $value;
+                }
+            }
+        }
+        echo json_encode('Data insert to database!');
+        return $arrayToSave;
+        /**
+         * конец блока кода
+         */
     }
 
 }

@@ -6,36 +6,40 @@ $(document).ready(function ()
         $.ajax
         ({
             type: "POST",
-            url: "rentalincome/filter",
+            url: "rentalincome/filter", //выводит на экран выбранные данные (месяц+адрес) и отрисовывает таблицу из базы.
             data: selectedValue,
             success: function (html)
             {
                 var currentSelection = JSON.parse(html);
-                console.log(currentSelection);
+                if ($('#tableRental')){
+                    $('#tableRental').remove();
+                }
+                writeTable(currentSelection.tableColumsName);
+                console.log('Data are in the table!');
                 $("#currentSelection").html('Address: ' + currentSelection.selection.address + ';</br>Month: ' + currentSelection.selection.month);
-                createTableFromRentalIncome(currentSelection.tableColumsName);
+                writeHiddenField('address',currentSelection.selection.address)
+                writeHiddenField('month',currentSelection.selection.month);
             }
         });
         return false;
     });
 });
-function createTableFromRentalIncome(array)
-{
-    if  ($("#table_rental")){
-        $("#table_rental").remove();
-        writeTable(array);
-    } else {
-        writeTable(array);
-    }
+function writeHiddenField(name,postVar) {
+    var hideField = $('<input/>', {
+        type: 'hidden',
+        name: name,
+        value: postVar
+    });
+    $('#saveRental').append(hideField);
 }
 function writeTable(array)
 {
     var table = $('<table/>', {
-        id:     'table_rental',
+        id:     'tableRental',
         class:  'table table-bordered rental-table'
     });
-    $('#table_rental_income').addClass('center-block').append(table);
-    $('#table_rental').append(
+    $('#tableRentalIncome').addClass('center-block').append(table);
+    $('#tableRental').append(
         $('<thead/>'),
         $('<tbody/>')
     );
@@ -96,18 +100,16 @@ $(document).ready(function ()
 {
     $("#saveRental").submit(function ()
     {
-        var selectedValue = $(this).serialize();
+        var valueToSave = $(this).serialize();
         $.ajax
         ({
             type: "POST",
-            url: "rentalincome/filter",
-            data: selectedValue,
+            url: "rentalincome/saverental",
+            data: valueToSave,
             success: function (html)
             {
-                var currentSelection = JSON.parse(html);
-                console.log(currentSelection);
-                $("#currentSelection").html('Address: ' + currentSelection.selection.address + ';</br>Month: ' + currentSelection.selection.month);
-                createTableFromRentalIncome(currentSelection.tableColumsName);
+                var answer = JSON.parse(html);
+                console.log(answer);
             }
         });
         return false;
