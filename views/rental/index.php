@@ -1,8 +1,3 @@
-<?php
-//echo '<pre>';
-//print_r($data);
-?>
-
 <!DOCTYPE HTML>
 <html>
     <head>

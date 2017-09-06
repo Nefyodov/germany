@@ -7,6 +7,7 @@ class RentalIncome
 
     public function __construct()
     {
+        $this->model = new Description();
         $this->listOfMonth = $this->generateListOfMonth();
     }
     public function index()
@@ -48,7 +49,7 @@ class RentalIncome
             'address' => $this->currentAddress,
             'month' => $this->currentMonth,
         ];
-        $data['tableColumsName'] = Description::tableColums($this->currentAddress,$this->currentMonth);
+        $data['tableColumsName'] = $this->model->tableColums($this->currentAddress,$this->currentMonth);
         return $data;
     }
     public function sendJSON()
@@ -61,7 +62,7 @@ class RentalIncome
     public function saveRental()
     {
         $arrayToSave = $this->prepareArrayToSave();
-        Description::saveRenral($arrayToSave);
+        $this->model->saveRental($arrayToSave);
 
     }
     public function prepareArrayToSave()
